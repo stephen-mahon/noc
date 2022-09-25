@@ -1,27 +1,31 @@
 class Ball {
-    constructor(xspeed, yspeed, r) {
-        this.x = random(width);
-        this.y = random(height);
+    constructor(x, y, xspeed, yspeed, radius) {
+        this.x = x;
+        this.y = y;
         this.xspeed = xspeed;
         this.yspeed = yspeed;
-        this.r = r;
-        this.color = random(255);
+        this.radius = radius;
     }
 
+    intersects(other) {
+        let d = dist(this.x, this.y, other.x, other.y);
+        return d < this.radius + other.radius;
+      }
+
     update() {
+        if ((this.x > (width-this.radius)) || (this.x < this.radius)) {
+            this.xspeed *= -1;
+        }
+        if ((this.y > (height-this.radius)) || (this.y < this.radius)) {
+            this.yspeed *= -1;
+        }
         this.x += this.xspeed;
         this.y += this.yspeed;
-        if ((this.x > (width-this.r)) || (this.x < this.r)) {
-            this.xspeed *= -1
-        }
-        if ((this.y > (height-this.r)) || (this.y < this.r)) {
-            this.yspeed *= -1
-        }
     }
 
     draw() {
-        stroke(0);
-        fill(this.color, this.color, this.color);
-        ellipse(this.x, this.y, this.r, this.r);
+        noStroke();
+        fill(255, 100, 300);
+        ellipse(this.x, this.y, this.radius*2);
     }
 }
