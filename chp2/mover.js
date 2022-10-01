@@ -1,13 +1,15 @@
 class Mover {
-    constructor(x, y) {
+    constructor(x, y, mass) {
         this.position = createVector(x, y);
         this.velocity = createVector(0, 0);
         this.acceleration = createVector(0, 0);
-        this.radius = 16;
+        this.mass = mass;
+        this.radius = sqrt(this.mass) * 5
     }
 
     applyForce(force){
-        this.acceleration.add(force);
+        let f = p5.Vector.div(force, this.mass)
+        this.acceleration.add(f);
     }
 
     edges() {
