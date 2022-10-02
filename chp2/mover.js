@@ -7,6 +7,18 @@ class Mover {
         this.radius = sqrt(this.mass) * 5
     }
 
+    friction() {
+        let diff = height - (this.position.y + this.radius);
+        if (diff < 1) {
+            let friction = this.velocity.copy();
+            friction.normalize();
+            friction.mult(-1);
+            let normal = this.mass;
+            friction.setMag(mu * normal);
+            this.applyForce(friction);
+        }
+    }
+
     applyForce(force){
         let f = p5.Vector.div(force, this.mass)
         this.acceleration.add(f);

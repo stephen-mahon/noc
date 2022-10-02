@@ -1,9 +1,10 @@
 let movers = [];
+let mu = 0.1;
 
 function setup() {
   createCanvas(400, 400);
-  for(let i=0;i<2;i++){
-    let mover = new Mover(200+(100*i), 200, 1+(i*2));
+  for(let i=0;i<10;i++){
+    let mover = new Mover(random(width), random(150, 200), random(1,8));
     movers.push(mover)
   }
   
