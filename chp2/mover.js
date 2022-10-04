@@ -7,6 +7,17 @@ class Mover {
         this.radius = sqrt(this.mass) * 5
     }
 
+    drag(dragC) {
+        let drag = this.velocity.copy();
+        drag.normalize();
+        drag.mult(-1);
+
+        let speedSq = this.velocity.magSq();
+        drag.setMag(dragC * speedSq);
+
+        this.applyForce(drag);
+    }
+
     friction() {
         let diff = height - (this.position.y + this.radius);
         if (diff < 1) {
